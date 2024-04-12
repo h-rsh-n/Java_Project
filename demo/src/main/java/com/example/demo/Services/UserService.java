@@ -1,13 +1,16 @@
-package com.example.demo.UserHandler;
+package com.example.demo.Services;
 
 import org.springframework.stereotype.Service;
+
+import com.example.demo.Models.User;
+import com.example.demo.Repositories.UserRepository;
 
 @Service
 public class UserService {
 
-    private final Repository userRepository;
+    private final UserRepository userRepository;
 
-    public UserService(Repository userRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

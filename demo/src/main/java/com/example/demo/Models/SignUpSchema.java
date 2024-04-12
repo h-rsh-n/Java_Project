@@ -1,4 +1,4 @@
-package com.example.demo.UserHandler.Login;
+package com.example.demo.Models;
 
 public class SignUpSchema {
     public String name;

@@ -1,4 +1,4 @@
-package com.example.demo.UserHandler;
+package com.example.demo.Models;
 
 import org.springframework.data.annotation.Id;
 

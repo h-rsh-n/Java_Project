@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Election Details</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        padding: 20px;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin-top: 0;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 10px;
+      }
+
+      form {
+        margin-top: 20px;
+      }
+
+      button {
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+      .winner {
+        color: #28a745;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        var electionStatus =
+          document.getElementById("electionStatus").innerText;
+        if (electionStatus === "pending") {
+          document.getElementById("standForElectionBtn").style.display =
+            "block";
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <h2>Election Details</h2>
+    <h3 th:text="${election.name}"></h3>
+    <h4>Candidates:</h4>
+    <ul>
+      <li th:each="candidate : ${election.candidates}">
+        <span th:text="${candidate.name}"></span>
+      </li>
+    </ul>
+    <form
+      action="/candidateDashboard/standForElection"
+      method="POST"
+      id="standForElectionForm"
+    >
+      <input type="hidden" name="electionId" th:value="${election.id}" />
+      <input type="hidden" name="candidateName" th:value="${candidateName}" />
+      <button type="submit" id="standForElectionBtn" style="display: none">
+        Stand for Election
+      </button>
+    </form>
+    <p
+      style="display: none"
+      id="electionStatus"
+      th:text="${election.status}"
+    ></p>
+    <p th:if="${election.status == 'completed'}" class="winner">
+      Winner: <span th:text="${election.winner}"></span>
+    </p>
+  </body>
+</html>

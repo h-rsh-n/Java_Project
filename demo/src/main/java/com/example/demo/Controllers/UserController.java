@@ -1,4 +1,4 @@
-package com.example.demo.UserHandler;
+package com.example.demo.Controllers;
 
 import java.util.ArrayList;
 
@@ -13,9 +13,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.example.demo.UserHandler.Login.Auth;
-import com.example.demo.UserHandler.Login.LoginSchema;
-import com.example.demo.UserHandler.Login.SignUpSchema;
+import com.example.demo.Models.Auth;
+import com.example.demo.Models.LoginSchema;
+import com.example.demo.Models.SignUpSchema;
+import com.example.demo.Models.User;
+import com.example.demo.Services.UserService;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.demo.Models.Candidate;
+import com.example.demo.Services.CandidateService;
 
 // import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +42,7 @@ public class UserController {
     public ResponseEntity<String> SignUpUser(@RequestBody SignUpSchema user) {
         
         // call some helper function from repository to save in mongodb
-        userService.SaveUser(new User(user.username, user.name, user.password));
+        userService.SaveUser(new User(user.name, user.name, user.password));
         String message = "User Signed Up. Saved Data!";
         return ResponseEntity.ok(message);
     }

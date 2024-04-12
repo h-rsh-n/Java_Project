@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Election Details</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        padding: 20px;
+      }
+
+      h2,
+      h3,
+      h4 {
+        margin-top: 0;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 10px;
+      }
+
+      .vote-btn {
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        display: inline-block;
+        text-decoration: none;
+      }
+
+      .vote-btn:hover {
+        background-color: #0056b3;
+      }
+
+      .winner {
+        color: #28a745;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Election Details</h2>
+    <h3 th:text="${election.name}"></h3>
+    <h4>Candidates:</h4>
+    <ul>
+      <li th:each="candidate : ${election.candidates}">
+        <span th:text="${candidate.name}"></span>
+        <span th:if="${election.status == 'ongoing'}">
+          <a href="#" class="vote-btn">Vote</a>
+        </span>
+      </li>
+    </ul>
+    <p th:if="${election.status == 'completed'}" class="winner">
+      Winner: <span th:text="${election.winner}"></span>
+    </p>
+  </body>
+</html>

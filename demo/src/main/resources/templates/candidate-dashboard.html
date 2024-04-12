@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Candidate Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+      }
+
+      .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .container.center {
+        border: 2px dashed #333;
+        grid-column: 1 / span 2; /* Spanning both columns */
+      }
+
+      .container.top-left {
+        border: 2px dashed #333;
+        grid-column: 1;
+        grid-row: 2;
+      }
+
+      .container.top-right {
+        border: 2px dashed #333;
+        grid-column: 2;
+        grid-row: 2;
+      }
+
+      .container.bottom-left {
+        border: 2px dashed #333;
+        grid-column: 1;
+        grid-row: 3;
+      }
+
+      .container.bottom-right {
+        border: 2px dashed #333;
+        grid-column: 2;
+        grid-row: 3;
+      }
+
+      h2 {
+        margin-top: 0;
+        margin-bottom: 20px;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 10px;
+      }
+
+      li a {
+        text-decoration: none;
+        color: #333;
+        padding: 10px;
+        background-color: #d5d3d3;
+        border-radius: 5px;
+        display: inline-block;
+      }
+
+      li a:hover {
+        background-color: #c3c3c3;
+      }
+
+      button {
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        display: inline-block;
+        text-decoration: none;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container center">
+      <h2>
+        Welcome to your Dashboard, <span th:text="${candidateName}"></span>!
+      </h2>
+    </div>
+    <div class="container top-left">
+      <h4>Pending Elections:</h4>
+      <ul>
+        <li th:each="election : ${pendingElections}">
+          <a
+            th:href="@{/candidateDashboard/electionDetails(candidateName=${candidateName}, electionId=${election.id}
+          )}"
+            ><span th:text="${election.name}"></span
+          ></a>
+        </li>
+      </ul>
+    </div>
+    <div class="container top-right">
+      <h4>Ongoing Elections:</h4>
+      <ul>
+        <li th:each="election : ${ongoingElections}">
+          <a
+            th:href="@{/candidateDashboard/electionDetails(electionId=${election.id})}"
+            ><span th:text="${election.name}"></span
+          ></a>
+        </li>
+      </ul>
+    </div>
+    <div class="container bottom-left">
+      <h4>Completed Elections:</h4>
+      <ul>
+        <li th:each="election : ${completedElections}">
+          <a
+            th:href="@{/candidateDashboard/electionDetails(electionId=${election.id})}"
+            ><span th:text="${election.name}"></span
+          ></a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

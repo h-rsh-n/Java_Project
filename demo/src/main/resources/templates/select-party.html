@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Party</title>
+  </head>
+  <body>
+    <h2>Select Party</h2>
+    <form action="/joinParty" method="POST">
+      <label for="party">Choose a party:</label>
+      <select id="party" name="party">
+        <option th:each="party : ${partyOptions}" th:text="${party}"></option>
+      </select>
+      <button type="submit">Join Party</button>
+    </form>
+  </body>
+</html>
