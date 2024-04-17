@@ -51,15 +51,20 @@
     <h3 th:text="${election.name}"></h3>
     <h4>Candidates:</h4>
     <ul>
-      <li th:each="candidate : ${election.candidates}">
-        <span th:text="${candidate.name}"></span>
+      <li th:each="entry : ${candidatesVotes}">
+        <span th:text="${entry.key}"></span> - Votes:
+        <span th:text="${entry.value}"></span>
         <span th:if="${election.status == 'ongoing'}">
-          <a href="#" class="vote-btn">Vote</a>
+          <a
+            th:href="@{/dashboard/electionDetails/vote(userId=${userId},electionId=${election.id},candidateId=${entry.key})}"
+            class="vote-btn"
+            >Vote</a
+          >
         </span>
       </li>
     </ul>
     <p th:if="${election.status == 'completed'}" class="winner">
-      Winner: <span th:text="${election.winner}"></span>
+      Winner: <span th:text="${election.winner.name}"></span>
     </p>
   </body>
 </html>
